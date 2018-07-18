@@ -31,11 +31,12 @@ class Tester(unittest.TestCase):
         dtype = torch.float64
         device = torch.device('cuda')
         m = layers.ROIAlign((5, 5), 0.5, 1).to(dtype=dtype, device=device)
-        x = torch.rand(1, 1, 10, 10, dtype=dtype, device=device)
+        x = torch.rand(1, 1, 10, 10, dtype=dtype, device=device, 
+                       requires_grad=True)
         rois = torch.tensor([
             [0, 0, 0, 10, 10],
             [0, 0, 5, 5, 10],
-            [0, 5, 5, 10, 10]], dtype=dtype, device=device)
+            [0, 5, 5, 10, 10]], dtype=dtype, device=device, requires_grad=True)
 
         def func(input):
             return m(input, rois)
@@ -46,11 +47,12 @@ class Tester(unittest.TestCase):
         dtype = torch.float64
         device = torch.device('cuda')
         m = layers.ROIPool((5, 5), 0.5).to(dtype=dtype, device=device)
-        x = torch.rand(1, 1, 10, 10, dtype=dtype, device=device)
+        x = torch.rand(1, 1, 10, 10, dtype=dtype, device=device,
+                       requires_grad=True)
         rois = torch.tensor([
             [0, 0, 0, 10, 10],
             [0, 0, 5, 5, 10],
-            [0, 5, 5, 10, 10]], dtype=dtype, device=device)
+            [0, 5, 5, 10, 10]], dtype=dtype, device=device, requires_grad=True)
 
         def func(input):
             return m(input, rois)

@@ -6,6 +6,7 @@ import shutil
 import sys
 from setuptools import setup, find_packages
 import glob
+import platform
 
 import torch
 from torch.utils.cpp_extension import CppExtension, CUDAExtension, CUDA_HOME
@@ -36,8 +37,12 @@ requirements = [
     'numpy',
     'pillow >= 4.1.1',
     'six',
-    'torch',
 ]
+
+if (torch.cuda.is_available() and CUDA_HOME is not None) or platform.system()=="Darwin":
+    requirements += ['torch-nightly']
+else:
+    requirements += ['torch-nightly-cpu']
 
 
 def get_extensions():

@@ -39,10 +39,10 @@ requirements = [
     'six',
 ]
 
-if (torch.cuda.is_available() and CUDA_HOME is not None) or platform.system()=="Darwin":
+if (torch.cuda.is_available() and CUDA_HOME is not None) and platform.system()!="Darwin":
     requirements += ['torch-nightly']
 else:
-    requirements += ['torch-nightly-cpu']
+    requirements += ['torch']
 
 
 def get_extensions():
